@@ -67,14 +67,15 @@ export class CredentialManagementController {
       return response.status(err.status).json(err.response);
     }
   }
-  @Get('user/:id')
-  async getUserById(@Res() response, @Param('id') userId: string) {
+  @Get('user/:id/:password')
+  async getUserById(@Res() response, @Param('id') userId: string,@Param('password') password: string) {
     try {
       const data =
-        await this.credentialManagementService.getUserById(userId);
+        await this.credentialManagementService.getUserByIdAndPassword(userId, password);
+       const responseData: any ={userId:data.userId, mobile:data.mobile, firstName: data.firstName, lastName: data.lastName}
       return response.status(HttpStatus.OK).json({
         message: 'Data found successfully',
-        data,
+        responseData
       });
     } catch (err) {
       console.log(err);

@@ -61,12 +61,13 @@ let CredentialManagementController = class CredentialManagementController {
             return response.status(err.status).json(err.response);
         }
     }
-    async getUserById(response, userId) {
+    async getUserById(response, userId, password) {
         try {
-            const data = await this.credentialManagementService.getUserById(userId);
+            const data = await this.credentialManagementService.getUserByIdAndPassword(userId, password);
+            const responseData = { userId: data.userId, mobile: data.mobile, firstName: data.firstName, lastName: data.lastName };
             return response.status(common_1.HttpStatus.OK).json({
                 message: 'Data found successfully',
-                data,
+                responseData
             });
         }
         catch (err) {
@@ -114,11 +115,12 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CredentialManagementController.prototype, "getAllUsers", null);
 __decorate([
-    (0, common_1.Get)('user/:id'),
+    (0, common_1.Get)('user/:id/:password'),
     __param(0, (0, common_1.Res)()),
     __param(1, (0, common_1.Param)('id')),
+    __param(2, (0, common_1.Param)('password')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:paramtypes", [Object, String, String]),
     __metadata("design:returntype", Promise)
 ], CredentialManagementController.prototype, "getUserById", null);
 __decorate([

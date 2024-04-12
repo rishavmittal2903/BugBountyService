@@ -38,9 +38,9 @@ let CredentialManagementService = class CredentialManagementService {
         }
         return Data;
     }
-    async getUserById(userId) {
+    async getUserByIdAndPassword(userId, password) {
         const data = await this.credentialManagementModel
-            .findOne({ userId })
+            .findOne({ userId, password })
             .exec();
         if (!data) {
             throw new common_1.NotFoundException(`Data #${userId} not found`);

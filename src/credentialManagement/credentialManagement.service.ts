@@ -37,9 +37,9 @@ export class CredentialManagementService {
     }
     return Data;
   }
-  async getUserById(userId: string): Promise<ICredential> {
+  async getUserByIdAndPassword(userId: string, password:string): Promise<ICredential> {
     const data = await this.credentialManagementModel
-      .findOne({ userId })
+      .findOne({ userId, password })
       .exec();
     if (!data) {
       throw new NotFoundException(`Data #${userId} not found`);

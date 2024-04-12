@@ -31,6 +31,6 @@ export declare class CredentialManagementService {
     registerUser(createUserDto: CreateUserDto): Promise<ICredential>;
     updateUser(eventId: string, createUserDto: CreateUserDto): Promise<ICredential>;
     getAllUsers(): Promise<ICredential[]>;
-    getUserById(userId: string): Promise<ICredential>;
+    getUserByIdAndPassword(userId: string, password: string): Promise<ICredential>;
     deleteUserById(userId: string): Promise<any>;
 }
